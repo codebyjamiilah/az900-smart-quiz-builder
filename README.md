@@ -77,7 +77,7 @@ Questions are based on the public AZ-900 skills outline on Microsoft Learn. Alwa
 ## Author
 
 **[NAMAYANJA WANYANA JAMIILA]**, Power Learn Project / #1MillionDevs
-[Your LinkedIn or email, optional]
+(namayanjajamiilah@gmail.com)
 
 ## Disclaimer
 
