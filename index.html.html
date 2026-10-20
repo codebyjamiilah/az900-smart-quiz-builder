@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AZ-900 Smart Quiz Builder (Unofficial)</title>
+<style>
+:root{--bg:#f6f7fb;--sf:#fff;--tx:#1b2033;--mu:#5d6580;--ac:#3b5bdb;--ok:#2f9e5b;--okb:#e3f6ea;--no:#d9480f;--nob:#fdebe3;--bd:#dde1ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12141c;--sf:#1c2030;--tx:#eef0f8;--mu:#a0a8c4;--ac:#7c93ff;--ok:#4cc38a;--okb:#16352a;--no:#ff8a5c;--nob:#3a2218;--bd:#2c3248;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12141c;--sf:#1c2030;--tx:#eef0f8;--mu:#a0a8c4;--ac:#7c93ff;--ok:#4cc38a;--okb:#16352a;--no:#ff8a5c;--nob:#3a2218;--bd:#2c3248;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:1.4rem;margin:8px 0 2px}h2{font-size:1.1rem;margin:0 0 10px}
+.sub{color:var(--mu);font-size:.85rem;margin:0 0 14px}
+.panel{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.pick{display:grid;gap:8px;margin:12px 0}
+.pick button,.opt{width:100%;text-align:left;border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:12px 14px;border-radius:12px;cursor:pointer;font-size:1rem;font-family:inherit}
+.pick button:hover,.opt:hover:not(:disabled){border-color:var(--ac)}
+.pick button.on{border-color:var(--ac);background:var(--ac);color:#fff}
+.go,.nx{border:0;background:var(--ac);color:#fff;padding:13px;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;margin-top:10px}
+.ghost{background:none;border:1px solid var(--bd);color:var(--tx)}
+.meta{display:flex;justify-content:space-between;font-size:.8rem;color:var(--mu);margin-bottom:6px}
+.bar{height:6px;background:var(--bd);border-radius:9px;overflow:hidden;margin-bottom:14px}.bar i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.q{font-size:1.15rem;font-weight:600;margin-bottom:12px}
+.opt{margin-bottom:8px}.opt:disabled{cursor:default}
+.opt.right{background:var(--okb);border-color:var(--ok)}.opt.wrong{background:var(--nob);border-color:var(--no)}
+.exp{margin-top:12px;padding:12px;border-radius:12px;background:var(--bg);border-left:4px solid var(--ac);font-size:.92rem}
+.big{font-size:2.4rem;font-weight:700;text-align:center;margin:6px 0}
+.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd);font-size:.9rem}
+.miss{margin-top:10px;padding:10px;border:1px solid var(--bd);border-radius:10px;font-size:.88rem}
+footer{margin-top:18px;font-size:.72rem;color:var(--mu);text-align:center}
+</style></head><body><main>
+<h1>📝 AZ-900 Smart Quiz Builder</h1>
+<p class="sub">Unofficial practice tool. Not affiliated with or endorsed by Microsoft. All questions are original.</p>
+<div id="app"></div>
+<footer>Built for the Vibe Coding Hackathon: AZ-900 Exam Prep Edition. Practice questions are for study only and are not real exam items.</footer>
+</main>
+<script>
+var Q=[
+["Cloud Concepts","A retailer expects traffic to spike every Black Friday and drop afterwards. Which cloud benefit lets resources grow and shrink automatically with demand?",["Elasticity","Geo-distribution","Data sovereignty","Fault isolation"],0,"Elasticity is automatic scaling out and in as demand changes. Scalability is the ability to add resources; elasticity is doing it automatically."],
+["Cloud Concepts","A company stops buying servers and instead pays a monthly bill based on usage. This is a shift from:",["OpEx to CapEx","CapEx to OpEx","Tagging to billing","IaaS to SaaS"],1,"Buying hardware is CapEx (up-front). Paying for what you consume is OpEx. Cloud generally moves spend from CapEx to OpEx."],
+["Cloud Concepts","Who is ALWAYS responsible for the security of the data stored in a cloud service?",["The cloud provider","The customer","Both equally by contract only","Neither, it is encrypted automatically"],1,"Under the shared responsibility model, data, identities and access are always the customer's responsibility, whatever the service type."],
+["Cloud Concepts","Your team wants to deploy code without managing servers or operating systems, but still wants to control the app and its data. Which model fits?",["IaaS","PaaS","SaaS","On-premises"],1,"PaaS: the provider manages infrastructure and the platform, you manage the app and data. IaaS leaves the OS to you; SaaS gives you a finished app."],
+["Cloud Concepts","Adding more CPU and RAM to a single existing virtual machine is called:",["Scaling out","Scaling in","Scaling up","Geo-replication"],2,"Scaling up (vertical) makes one machine bigger. Scaling out (horizontal) adds more instances."],
+["Cloud Concepts","An organisation keeps sensitive data in its own datacenter but runs web apps in Azure, connecting both. This is a:",["Public cloud","Private cloud","Hybrid cloud","Community cloud"],2,"Hybrid cloud combines on-premises or private resources with public cloud, connected together."],
+["Architecture & Services","You want your app to keep running even if one entire datacenter in a region fails. What should you use?",["Resource locks","Availability zones","Management groups","Azure Advisor"],1,"Availability zones are physically separate datacenters within a region, so spreading across them protects against a datacenter failure."],
+["Architecture & Services","Which Azure construct is a logical container used to group related resources so they can be managed and deleted together?",["Subscription","Region","Resource group","Availability set"],2,"A resource group holds related resources. Deleting the group deletes everything in it."],
+["Architecture & Services","You need to organise 12 subscriptions and apply one governance policy across all of them. What is the best fit?",["Resource group","Management group","Tag","Virtual network"],1,"Management groups sit above subscriptions, so policies and access applied there are inherited by every subscription beneath."],
+["Architecture & Services","Which service runs small pieces of code only when triggered by an event, and bills per execution?",["Virtual Machines","Azure Functions","Azure Arc","Azure Policy"],1,"Azure Functions is serverless compute: event-triggered, no server management, pay per execution."],
+["Architecture & Services","Old compliance records must be kept for years, are almost never read, and storage cost must be as low as possible. Which blob tier fits?",["Hot","Cool","Archive","Premium"],2,"Archive is the cheapest to store but data must be rehydrated (taking hours) before it can be read."],
+["Architecture & Services","Which service provides single sign-on and multifactor authentication for users and applications?",["Microsoft Entra ID","Azure Monitor","Azure Cosmos DB","Azure Bastion"],0,"Microsoft Entra ID is Azure's cloud identity and access management service."],
+["Architecture & Services","Which feature filters inbound and outbound network traffic to Azure resources using allow and deny rules?",["Network security group","Resource lock","Availability zone","Azure Advisor"],0,"A network security group (NSG) contains security rules that allow or deny traffic by source, destination, port and protocol."],
+["Governance & Management","You must stop anyone from creating virtual machines outside approved regions, even users who have permission to create VMs. Which tool?",["RBAC","Azure Policy","Azure Monitor","Tags"],1,"Azure Policy enforces rules on how resources are configured or where they can be created. RBAC controls what users may do, not resource compliance."],
+["Governance & Management","A critical production database must be protected from accidental deletion, but admins should still be able to edit it. What do you apply?",["ReadOnly lock","CanNotDelete lock","Tag","Policy exemption"],1,"A CanNotDelete lock allows reads and edits but blocks deletion. A ReadOnly lock would block edits too."],
+["Governance & Management","You are planning a migration and want to compare the cost of staying on-premises against moving to Azure. Which tool helps?",["Pricing calculator","TCO calculator","Azure Advisor","Service Health"],1,"The TCO calculator compares on-premises costs with Azure. The pricing calculator estimates the cost of Azure services you choose."],
+["Governance & Management","Which service gives personalised recommendations to improve reliability, security, performance and cost of your resources?",["Azure Advisor","Azure Arc","Azure Bicep","Azure Lighthouse"],0,"Azure Advisor analyses your resources and recommends best practices across several categories."],
+["Governance & Management","Which service lets you manage on-premises servers and other clouds' resources from Azure?",["Azure Arc","Azure Policy","Azure Monitor","Azure Blueprints"],0,"Azure Arc projects non-Azure resources into Azure so you can govern and manage them with the same tools."],
+["Governance & Management","Which approach lets you describe Azure infrastructure in a file and deploy it repeatably?",["Manual portal clicks","Infrastructure as code (ARM/Bicep)","Azure Advisor","Resource tags"],1,"ARM templates and Bicep define infrastructure declaratively, so deployments are consistent and repeatable."],
+["Architecture & Services","Staff should be asked for multifactor authentication only when they sign in from outside the office network. Which feature enforces this kind of rule?",["Microsoft Entra Conditional Access","Resource locks","Azure Policy","Availability zones"],0,"Conditional Access evaluates signals such as location, device and sign-in risk, then decides to allow, block or require extra steps like MFA."],
+["Architecture & Services","Which security model is summed up as 'never trust, always verify'?",["Shared responsibility","Elasticity","Zero Trust","Geo-redundancy"],2,"Zero Trust verifies every request explicitly, grants least-privilege access, and assumes a breach could already have happened."],
+["Architecture & Services","Protecting resources with several layers, such as physical security, identity, network, compute, application and data, is known as:",["Zero Trust","Scale-out design","Defense in depth","Consumption-based pricing"],2,"Defense in depth uses multiple layers so that if one layer is breached, the others still slow or stop an attacker."],
+["Architecture & Services","A contractor must be able to restart virtual machines in one resource group and do nothing else. What is the best approach?",["Assign an appropriate role scoped to that resource group (RBAC)","Make them owner of the subscription","Apply a ReadOnly lock to the group","Add a tag to each VM"],0,"Role-based access control lets you grant the least privilege needed, at the narrowest scope that does the job."],
+["Architecture & Services","A legacy app in Azure needs domain join, LDAP and Kerberos, but you do not want to run your own domain controller VMs. What fits?",["Azure Policy","Microsoft Entra Domain Services","Azure Bastion","Azure Advisor"],1,"Microsoft Entra Domain Services provides managed domain services such as domain join, LDAP and Kerberos without deploying and managing domain controllers."],
+["Architecture & Services","Which sign-in approach removes the need to type a password, for example by using a fingerprint or a security key?",["Resource tagging","Single-tenant design","Autoscaling","Passwordless authentication"],3,"Passwordless methods such as Windows Hello or FIDO2 security keys replace the password with something you have or are, which is harder to phish."],
+["Governance & Management","Which service shows a secure score and recommendations for hardening your resources across Azure, on-premises and other clouds?",["Azure Pricing calculator","Resource locks","Azure Service Health","Microsoft Defender for Cloud"],3,"Defender for Cloud assesses your security posture, gives recommendations and helps protect workloads from threats."],
+["Governance & Management","An organisation needs to discover, classify and govern its data across on-premises, multicloud and SaaS sources to meet compliance needs. Which service helps?",["Azure Monitor","Azure Functions","Microsoft Purview","Azure Advisor"],2,"Microsoft Purview is a data governance and compliance solution that helps you understand, protect and manage your data estate."],
+["Governance & Management","You want an email whenever a virtual machine's CPU stays above 90% for 10 minutes. Which service do you configure?",["Azure Monitor alerts","Azure Policy","Resource locks","TCO calculator"],0,"Azure Monitor collects metrics and logs, and alert rules can notify you when a metric crosses a threshold."],
+["Governance & Management","Finance wants cloud costs grouped by department across many resource groups. Which feature helps most?",["Resource locks","Availability zones","Tags","Azure Arc"],2,"Tags are name/value labels you add to resources, for example Department=Sales. Cost reports can be grouped by tag. Tags do not change how a resource behaves."],
+["Governance & Management","Which mechanism decides what actions a particular person is allowed to perform on Azure resources?",["Azure Policy","Azure RBAC","Azure Advisor","Tags"],1,"RBAC is about people: who can do what, and where. Azure Policy is about resources: what they must look like. Think 'RBAC = permissions for people, Policy = rules for resources'."],
+["Governance & Management","Which service tells you if an Azure outage or planned maintenance in a region is affecting the services you use?",["Azure Cost Management","Azure Service Health","Azure Policy","Bicep"],1,"Service Health reports service issues, planned maintenance and health advisories that affect your subscriptions. Resource Health, by contrast, is about one specific resource."],
+["Governance & Management","One specific virtual machine seems unavailable. Which tool shows that single resource's health and the likely cause?",["Management groups","Microsoft Purview","Azure Resource Health","Pricing calculator"],2,"Resource Health reports the health of an individual resource, such as one VM. Service Health covers Azure-wide issues that affect you."],
+["Governance & Management","You want to set a monthly budget and get alerts when spending nears the limit. Which tool?",["Microsoft Cost Management","Azure Advisor","Resource locks","Azure Arc"],0,"Cost Management lets you analyse spending, set budgets and receive alerts. The calculators only estimate costs before you deploy."],
+["Governance & Management","Which Azure Monitor feature lets you write queries to analyse log data collected from many resources?",["Azure Advisor","Cloud Shell","Resource locks","Log Analytics"],3,"Log Analytics is the tool in Azure Monitor for querying and analysing log data."],
+["Governance & Management","You need to run Azure CLI or PowerShell commands from a browser without installing anything. What do you use?",["Azure Cloud Shell","Azure Arc","Azure Policy","Availability zone"],0,"Azure Cloud Shell is a browser-based command line with Azure CLI and PowerShell ready to use."],
+["Governance & Management","You apply a CanNotDelete lock to a resource group. What happens to the resources inside it?",["They inherit the lock","They are not affected","They are moved to another region","They are tagged automatically"],0,"Locks are inherited by child resources, so the resources in the group also cannot be deleted while the lock remains."],
+["Governance & Management","A set of related policy definitions that you assign together to reach one goal is called:",["A resource lock","A tag","A region pair","A policy initiative"],3,"An initiative groups several policy definitions so you can assign and track them as a single unit."],
+["Governance & Management","Which Azure Monitor feature helps you detect performance problems and failures in your web application?",["Application Insights","Azure Bastion","Management groups","Cost Management"],0,"Application Insights monitors live applications, tracking requests, response times, failures and usage."]
+];
+var DOMS=["All domains","Cloud Concepts","Architecture & Services","Governance & Management"];
+var dom=0,len=10,qs=[],i=0,sc=0,ans=null,miss=[],byD={},best=null;
+try{best=JSON.parse(localStorage.getItem("az900qz"))}catch(e){}
+function $(h){document.getElementById("app").innerHTML=h}
+function shuf(a){a=a.slice();for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),t=a[j];a[j]=a[k];a[k]=t}return a}
+function home(){
+ $('<div class="panel"><h2>Build your quiz</h2><div>Domain</div><div class="pick" id="pd">'+DOMS.map(function(d,n){return '<button data-d="'+n+'" class="'+(n===dom?"on":"")+'">'+d+'</button>'}).join("")+'</div><div>Length</div><div class="pick" style="grid-template-columns:repeat(3,1fr)" id="pl">'+[10,20,38].map(function(n){return '<button data-l="'+n+'" class="'+(n===len?"on":"")+'">'+n+' Qs</button>'}).join("")+'</div>'+(best?'<p class="sub">Best score so far: '+best+'%</p>':'')+'<button class="go" id="st">Start quiz</button></div>');
+ document.getElementById("pd").onclick=function(e){if(e.target.dataset.d){dom=+e.target.dataset.d;home()}};
+ document.getElementById("pl").onclick=function(e){if(e.target.dataset.l){len=+e.target.dataset.l;home()}};
+ document.getElementById("st").onclick=function(){begin(Q.filter(function(q){return dom===0||q[0]===DOMS[dom]}))}}
+function begin(pool){qs=shuf(pool).slice(0,len);i=0;sc=0;miss=[];byD={};show()}
+function show(){
+ var q=qs[i],o=shuf([0,1,2,3]);ans=null;
+ $('<div class="panel"><div class="meta"><span>'+q[0]+'</span><span>Question '+(i+1)+' of '+qs.length+'</span></div><div class="bar"><i style="width:'+(i/qs.length*100)+'%"></i></div><div class="q">'+q[1]+'</div><div id="os">'+o.map(function(n){return '<button class="opt" data-n="'+n+'">'+q[2][n]+'</button>'}).join("")+'</div><div id="fb"></div></div>');
+ document.getElementById("os").onclick=function(e){var b=e.target.closest(".opt");if(b&&ans===null)pick(+b.dataset.n)}}
+function pick(n){
+ var q=qs[i],ok=n===q[3];ans=n;byD[q[0]]=byD[q[0]]||[0,0];byD[q[0]][1]++;
+ if(ok){sc++;byD[q[0]][0]++}else miss.push(q);
+ var bs=document.querySelectorAll(".opt");
+ for(var j=0;j<bs.length;j++){var v=+bs[j].dataset.n;bs[j].disabled=true;if(v===q[3])bs[j].classList.add("right");else if(v===n)bs[j].classList.add("wrong")}
+ document.getElementById("fb").innerHTML='<div class="exp"><b>'+(ok?"✅ Correct.":"❌ Not quite.")+'</b> '+q[4]+'</div><button class="nx" id="nx">'+(i+1<qs.length?"Next question":"See results")+'</button>';
+ document.getElementById("nx").onclick=function(){i++;i<qs.length?show():end()}}
+function end(){
+ var p=Math.round(sc/qs.length*100);
+ if(best===null||p>best){best=p;try{localStorage.setItem("az900qz",JSON.stringify(p))}catch(e){}}
+ var v=p>=80?"Looking strong. Keep practising to stay sharp.":p>=60?"Getting there. Review the missed topics below.":"Keep going. Revisit the basics and try again.";
+ var rows=Object.keys(byD).map(function(d){return '<div class="row"><span>'+d+'</span><span>'+byD[d][0]+' / '+byD[d][1]+'</span></div>'}).join("");
+ var ms=miss.map(function(q){return '<div class="miss"><b>'+q[1]+'</b><br>Answer: '+q[2][q[3]]+'<br><span style="color:var(--mu)">'+q[4]+'</span></div>'}).join("");
+ $('<div class="panel"><div class="big">'+p+'%</div><p style="text-align:center;margin:0 0 12px">'+sc+' of '+qs.length+' correct. '+v+'</p><h2>By domain</h2>'+rows+(miss.length?'<h2 style="margin-top:16px">Review your misses</h2>'+ms:'')+(miss.length?'<button class="go" id="rm">Retry missed questions</button>':'')+'<button class="go ghost" id="nw">New quiz</button></div>');
+ if(miss.length)document.getElementById("rm").onclick=function(){var m=miss;begin(m)};
+ document.getElementById("nw").onclick=home}
+home();
+</script></body></html>
