@@ -26,7 +26,7 @@ A quiz app that explains **every** answer straight away, organised by the three 
 
 ## Features
 
-- ✅ 27 original, scenario-style questions
+- ✅ 38 original, scenario-style
 - 💡 Instant explanation after every answer (right or wrong)
 - 🎯 Choose one domain or all domains
 - 🔀 Questions and answer options shuffled every time
