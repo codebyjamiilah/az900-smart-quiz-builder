@@ -6,7 +6,7 @@
 Built for the **Vibe Coding Hackathon: AZ-900 Exam Prep Edition** (#1MillionDevs, Power Learn Project Africa).
 
 **🔗 Live demo:** https://codebyjamiilah.github.io/az900-smart-quiz-builder/
-**🎥 Demo video:** https://drive.google.com/file/d/1Zh6e9sHl-xsJSw8AmUbNDcIP6X2wdwIc/view?usp=sharing
+**🎥 Demo video:** https://drive.google.com/file/d/1xcaPYxhu4oLC2BzwTLwTDYXw4E9Gt-ys/view?usp=sharing
 
 ---
 
