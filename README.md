@@ -84,7 +84,7 @@ Questions are based on the public AZ-900 skills outline on Microsoft Learn. Alwa
 | Name | GitHub | What they did |
 |---|---|---|
 | Namayanja Wanyana Jamiila | [@codebyjamiilah](https://github.com/codebyjamiilah) | Built the app, wrote the README, presented the demo |
-| [Lloyd banks ] | [@lloydbanks985-hue](https://github.com/lloydbanks985-hue) | Created the Canva pitch deck |
+| [Lloyd banks ] | [@lloydbanks985-hue](https://github.com/lloydbanks985-hue) | Helped create the Canva pitch deck |
 
 Power Learn Project / #1MillionDevs
 Contact: namayanjajamiilah@gmail.com
